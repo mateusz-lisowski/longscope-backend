@@ -5,40 +5,6 @@ import csv
 import pandas as pd
 import matplotlib.pyplot as plt
 
-PERIODS = {
-    'year': 282,
-    'q1': 270,
-    'q2': 271,
-    'q3': 272,
-    'q4': 273,
-    'm1': 111,
-}
-
-CHART_469 = {
-    'header': {
-
-    },
-    'data': [
-        {
-            'date': None,
-            'value': None,
-        },
-        {
-            'date': None,
-            'value': None,
-        },
-    ]
-}
-
-BWUK = {
-    'id': 469,
-    'name': 'Bierzący wskaźnik ufności konsumenckiej (BWUK)',
-    'section': 16,
-    'dimension': 2,
-    'position': 33617,
-    'periods': [247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258],
-    'unit': 'PLN'
-}
 
 chart_381 = {
     'header': {
@@ -53,40 +19,39 @@ chart_381 = {
     'data': []
 }
 
-with open('data/381-data.csv', 'r') as f:
-    csv_reader = csv.reader(f, delimiter=',')
-    for row in csv_reader:
 
-        year, month, value = row
+def csv_to_chart_data(path: str, chart: dict):
+    with open(path, 'r') as f:
 
-        year = int(year)
-        month = int(month)
-        value = int(value)
+        csv_reader = csv.reader(f, delimiter=',')
+        for row in csv_reader:
+            year, month, value = row
 
-        days = calendar.monthrange(year, month)[1]
+            year = int(year)
+            month = int(month)
+            value = int(value)
 
-        date = datetime.datetime(year, month, days)
+            days = calendar.monthrange(year, month)[1]
+            date = datetime.datetime(year, month, days)
 
-        record = {
-            'date': date.strftime('%Y-%m-%d'),
-            'value': value
-        }
+            record = {
+                'date': date.strftime('%Y-%m-%d'),
+                'value': value
+            }
 
-        chart_381['data'].append(record)
-
-df = pd.DataFrame(chart_381['data'])
-df.plot(x='date', y='value', rot=0)
-plt.show()
+            chart['data'].append(record)
 
 
-# def main():
-#
-#     # while True:
-#     #     current_date = datetime.datetime
-print(f'''https://api-dbw.stat.gov.pl/api/1.1.0/variable/variable-data-section?id-zmienna={BWUK['id']}&id-przekroj={BWUK['section']}&id-rok=2023&id-okres={BWUK['periods'][0]}&ile-na-stronie=5000&numer-strony=0&lang=pl''')
-#     # print(req.url)
-#     # rich.print(req.json()['data'][0])
-#
-#
-# if __name__ == '__main__':
-#     main()
+def plot_chart(chart: dict):
+    df = pd.DataFrame(chart['data'])
+    df.plot(x='date', y='value', rot=0)
+    plt.show()
+
+
+def main():
+    csv_to_chart_data('data/381-data.csv', chart_381)
+    plot_chart(chart_381)
+
+
+if __name__ == '__main__':
+    main()
