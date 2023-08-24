@@ -38,7 +38,7 @@ while True:
     )
 
     req = requests.get(req_url)
-    time.sleep(0.200)
+    time.sleep(9)
 
     try:
         data = req.json()['data']
@@ -63,8 +63,8 @@ while True:
         current_month = 12
 
     # Safety switch
-    if current_year <= 2020:
-        break
+    # if current_year <= 2020:
+    #     break
 
 
 df = pd.DataFrame(chart_381['data'])
