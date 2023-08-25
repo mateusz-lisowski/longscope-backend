@@ -1,23 +1,18 @@
 import datetime
 import calendar
 import csv
+import json
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
-chart_381 = {
-    'header': {
-            'id': 381,
-            'name': 'Mieszkania oddane do użytkowania',
-            'section': 16,
-            'dimension': 2,
-            'position': 33617,
-            'periods': [247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258],
-            'unit': 'sz.'
-        },
-    'data': []
-}
+def get_chart_by_id(path: str, chart_id: int) -> dict:
+    with open(path, 'r') as f:
+        charts = json.load(f)
+        for chart in charts:
+            if chart['header']['id'] == chart_id:
+                return chart
 
 
 def csv_to_chart_data(path: str, chart: dict):
@@ -25,6 +20,7 @@ def csv_to_chart_data(path: str, chart: dict):
 
         csv_reader = csv.reader(f, delimiter=',')
         for row in csv_reader:
+
             year, month, value = row
 
             year = int(year)
@@ -49,6 +45,7 @@ def plot_chart(chart: dict):
 
 
 def main():
+    chart_381 = get_chart_by_id('data/charts_config.json', 381)
     csv_to_chart_data('data/381-data.csv', chart_381)
     plot_chart(chart_381)
 
