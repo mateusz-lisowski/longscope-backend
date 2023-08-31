@@ -52,36 +52,32 @@ def get_data_dbw_monthly(chart_id: str, url: str):
         json.dump(chart, f)
 
 
-# with open('charts_meta.json', 'r') as f:
-#     charts_data = json.load(f)
+def main():
+    with open('charts_meta.json', 'r') as f:
+        charts_data = json.load(f)
+
+    for chart_meta in charts_data:
+
+        # DBW API
+        if chart_meta["api-id"] == "1f0a88c6-3e78-4231-8fb2-706ba63ff53b":
+
+            url = chart_meta["url"]
+            chart_id = chart_meta["chart-id"]
+            current_year = datetime.datetime.now().year
+
+            req_month = f'{url}&id-rok={current_year - 2}&id-okres=258'
+            req_quarter = f'{url}&id-rok={current_year - 2}&id-okres=273'
+            req_year = f'{url}&id-rok={current_year - 2}&id-okres=282'
+
+            if requests.get(req_month).status_code == 200:
+                print('month')
+                get_data_dbw_monthly(chart_id, url)
+                break
+            elif requests.get(req_quarter).status_code == 200:
+                print('quarter')
+            elif requests.get(req_year).status_code == 200:
+                print('year')
 
 
-get_data_dbw_monthly(
-    'e4b6883b-9b44-4bde-9469-5e928c8ccce7',
-    'https://api-dbw.stat.gov.pl/api/1.1.0/variable/variable-data-section?id-zmienna=469'
-    '&id-przekroj=16&ile-na-stronie=5000&numer-strony=0&lang=pl'
-)
-
-
-#
-# for chart_meta in charts_data:
-#
-#     # DBW API
-#     if chart_meta["api-id"] == "1f0a88c6-3e78-4231-8fb2-706ba63ff53b":
-#
-#         url = chart_meta["url"]
-#         chart_id = chart_meta["chart-id"]
-#         current_year = datetime.datetime.now().year
-#
-#         req_month = f'{url}&id-rok={current_year - 2}&id-okres=258'
-#         req_quarter = f'{url}&id-rok={current_year - 2}&id-okres=273'
-#         req_year = f'{url}&id-rok={current_year - 2}&id-okres=282'
-#
-#         if requests.get(req_month).status_code == 200:
-#             print('month')
-#
-#             break
-#         elif requests.get(req_quarter).status_code == 200:
-#             print('quarter')
-#         elif requests.get(req_year).status_code == 200:
-#             print('year')
+if __name__ == '__main__':
+    main()
