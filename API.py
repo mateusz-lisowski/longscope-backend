@@ -70,9 +70,8 @@ def main():
             req_year = f'{url}&id-rok={current_year - 2}&id-okres=282'
 
             if requests.get(req_month).status_code == 200:
-                print('month')
+                print('Type of downloading: month')
                 get_data_dbw_monthly(chart_id, url)
-                break
             elif requests.get(req_quarter).status_code == 200:
                 print('quarter')
             elif requests.get(req_year).status_code == 200:
