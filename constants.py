@@ -1,0 +1,2 @@
+CHARTS_DIRECTORY = 'charts'
+DATA_DIRECTORY = 'data'
