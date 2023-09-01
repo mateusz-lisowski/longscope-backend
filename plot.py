@@ -1,14 +1,7 @@
-import json
-
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
-def get_chart_by_id(chart_id: str) -> dict:
-    with open(f'charts/{chart_id}.json', 'r') as f:
-        chart = json.load(f)
-
-    return chart
+import engine as e
 
 
 def plot_chart(chart: dict):
@@ -19,7 +12,7 @@ def plot_chart(chart: dict):
 
 def main():
     chart_id = input("Provide chart id: ")
-    chart = get_chart_by_id(chart_id)
+    chart = e.get_chart_by_id(chart_id)
     plot_chart(chart)
 
 
