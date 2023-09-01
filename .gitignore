@@ -1,4 +1,5 @@
-/data
-/charts
-/venv
-
+/charts/
+/data/
+/venv/
+/meta/
+charts_meta.json
