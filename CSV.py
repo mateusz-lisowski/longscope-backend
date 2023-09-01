@@ -1,29 +1,31 @@
-import json
 import csv
 
+import engine as e
 
-with open('charts_meta.json', 'r') as f:
-    charts_data = json.load(f)
 
-for chart_meta in charts_data:
+def main():
 
-    data = []
+    charts_meta = e.get_charts_meta()
 
-    with open(f'data/{chart_meta["chart-id"]}.csv', 'r') as f:
-        csv_reader = csv.reader(f, delimiter=',')
-        for row in csv_reader:
+    for chart_meta in charts_meta:
 
-            record = {
-                'date': row[0],
-                'value': float(row[1])
-            }
+        data = []
 
-            data.append(record)
+        with open(f'data/{chart_meta["chart-id"]}.csv', 'r') as f:
+            csv_reader = csv.reader(f, delimiter=',')
+            for row in csv_reader:
 
-    with open(f'charts/{chart_meta["chart-id"]}.json', 'r') as f:
-        chart = json.load(f)
+                record = {
+                    'date': row[0],
+                    'value': float(row[1])
+                }
 
-    chart["data"] = data
+                data.append(record)
 
-    with open(f'charts/{chart_meta["chart-id"]}.json', 'w') as f:
-        json.dump(chart, f)
+        chart = e.get_chart_by_id(chart_meta["chart-id"])
+        chart["data"] = data
+        e.write_chart_to_file(chart)
+
+
+if __name__ == '__main__':
+    main()
