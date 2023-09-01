@@ -1,2 +1,3 @@
 CHARTS_DIRECTORY = 'charts'
 DATA_DIRECTORY = 'data'
+META_DIRECTORY = 'meta'

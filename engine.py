@@ -15,6 +15,6 @@ def write_chart_to_file(chart: dict):
 
 
 def get_charts_meta():
-    with open('charts_meta.json', 'r') as f:
+    with open(f'{c.META_DIRECTORY}/charts_meta.json', 'r') as f:
         charts_meta = json.load(f)
     return charts_meta
