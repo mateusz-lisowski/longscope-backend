@@ -2,4 +2,6 @@
 /data/
 /venv/
 /meta/
+/.idea/
+/__pycache__/Deed
 charts_meta.json
