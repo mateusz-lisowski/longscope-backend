@@ -1,8 +1,6 @@
-# Import build-in modules
 import csv
 
-# Import project modules
-import engine as e
+import longscope.engine as e
 
 
 def get_csv_reader(chart_id: str) -> csv.reader:
