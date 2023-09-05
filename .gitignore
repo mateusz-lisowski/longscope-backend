@@ -3,5 +3,5 @@
 /venv/
 /meta/
 /.idea/
-/__pycache__/Deed
+__pycache__/
 charts_meta.json
