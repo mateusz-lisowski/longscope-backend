@@ -9,6 +9,8 @@ class Rate:
 
 
 class DataFetcher(Protocol):
+    uuid: str
+
     @staticmethod
     def get_data_for_code_and_date(table: str, code: str, date: str = 'today') -> Rate:
         """Returns a rate for the given code and date."""

@@ -12,6 +12,8 @@ DATE_FORMAT = '%Y-%m-%d'
 
 
 class NBP:
+    uuid = '836c00a8-92ac-44fd-98ac-09f974bb89fe'
+
     @staticmethod
     def get_data_for_code_and_date(table: str, code: str, date: str = 'today') -> Rate:
         """Returns a rate for the given code and date."""
