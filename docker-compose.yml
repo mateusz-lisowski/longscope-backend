@@ -1,0 +1,22 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    environment:
+      # Create default management user
+      - RABBITMQ_DEFAULT_USER
+      - RABBITMQ_DEFAULT_PASSWORD
+    ports:
+      - 15672:15672 # Management console
+      - 5672:5672 # Listening port
+
+  celery:
+    build: ./docker/celery
+
+  pocketbase:
+    build: ./docker/pocketbase
+    ports:
+      - 8090:8090
+    volumes:
+      - ./pb_data:/app
+      - ./pb_migrations:/app
