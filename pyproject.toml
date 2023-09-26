@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "longscope"
+version = "0.1.0"
+description = ""
+authors = ["Adam Ksiezyk <adam.ksiezyk@gmail.com>"]
+readme = "README.md"
+packages = [{include = "longscope", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.1.0"
+matplotlib = "^3.7.2"
+requests = "^2.31.0"
+pocketbase = "^0.9.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

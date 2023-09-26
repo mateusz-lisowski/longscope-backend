@@ -3,5 +3,10 @@
 /venv/
 /meta/
 /.idea/
-/__pycache__/Deed
+__pycache__/
 charts_meta.json
+
+# Pocketbase
+/pocketbase
+/pb_data/
+/pb_migrations/
